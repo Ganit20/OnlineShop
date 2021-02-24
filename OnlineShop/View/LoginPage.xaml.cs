@@ -39,6 +39,7 @@ namespace OnlineShop.View
                     MessageBox.Show("Wrong Username or Password");
                     return;
                 }
+                
                 if (LoginInput.Text == user.Login && PasswordInput.Password == user.Password)
                 {
                     StaticInfo.UserName = user.Login;

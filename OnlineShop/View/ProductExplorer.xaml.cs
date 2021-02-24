@@ -89,6 +89,7 @@ namespace OnlineShop.View
                     ProductId = item.Id,
                     UserId = StaticInfo.UserId
                 }) ;
+                context.SaveChanges();
             }
         }
     }

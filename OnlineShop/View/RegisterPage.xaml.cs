@@ -39,13 +39,13 @@ namespace OnlineShop.View
                         Login = LoginInput.Text,
                         Password = PasswordInput.Password,
                         Email = EmailInput.Text,
-                        UserRoleId = 1,
+                        UserRoleId = 2,
                     };
                     context.Users.Add(customer);
 
                     context.SaveChanges();
 
-
+                    MainWindow.MainWindowInstance.MainFrame.Navigate(new LoginPage());
                 } }
             else
             {

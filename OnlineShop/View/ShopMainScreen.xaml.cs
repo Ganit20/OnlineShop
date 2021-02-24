@@ -52,6 +52,22 @@ namespace OnlineShop.View
             {
                 adminPanel = value;
             }
+        } 
+        ShopingCartPage shopingCartPage;
+        ShopingCartPage ShopingCartPage
+        { 
+            get
+            {
+                if(shopingCartPage == null)
+                {
+                    shopingCartPage = new ShopingCartPage();
+                }
+                return shopingCartPage;
+            }
+            set
+            {
+                shopingCartPage = value;
+            }
         }
         ProfilePage profilePage;
         ProfilePage ProfilePage
@@ -106,7 +122,13 @@ namespace OnlineShop.View
 
         private void CartClick(object sender, RoutedEventArgs e)
         {
-           
+            if (ActualPage == ShopingCartPage)
+                ActualPage.Refresh();
+            else
+            {
+                ShopPageFrame.Navigate(ShopingCartPage);
+                ActualPage = ShopingCartPage;
+            }
         }
 
         private void ProfileClick(object sender, RoutedEventArgs e)
