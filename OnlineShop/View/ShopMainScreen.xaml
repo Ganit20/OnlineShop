@@ -13,32 +13,13 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="5*"/>
-        </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
-            <Button Content="Home Page" Margin="10" Padding="5"/>
-            <Button Content="Profile" Margin="10" Padding="5"/>
-            <Button Content="Shopping Cart" Margin="10" Padding="5"/>
-            <Button Content="Admin Panel" Margin="10" Padding="5"/>
+            <Button Content="Home Page" Click="HomePageClick" Margin="10" Padding="5"/>
+            <Button Content="Profile" Click="ProfileClick" Margin="10" Padding="5"/>
+            <Button Content="Shopping Cart" Click="CartClick" Margin="10" Padding="5"/>
+            <Button Content="Admin Panel" Margin="10" Click="AdminPanelClick" Padding="5"/>
+            <Button Content="Refresh" Click="Refresh" Margin="10" Padding="5"/>
         </StackPanel>
-        <ListView Grid.Row="1" ItemsSource="{Binding CategoryList}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding CategoryName}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <ListView x:Name="ProductListView" ItemsSource="{Binding ProductList}" Grid.Row="1" Grid.Column="1">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <DockPanel>
-                        <Image Source="{Binding ProductImageUrl}" DockPanel.Dock="Left"/>
-                        <TextBlock Text="{Binding ProductName}" DockPanel.Dock="Right"/>
-                    </DockPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Frame x:Name="ShopPageFrame" Grid.Row="1" />
     </Grid>
 </Page>

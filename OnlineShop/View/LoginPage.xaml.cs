@@ -44,6 +44,7 @@ namespace OnlineShop.View
                     StaticInfo.UserName = user.Login;
                     StaticInfo.UserEmail = user.Email;
                     StaticInfo.UserRole = context.UserRoles.FromSqlRaw($"Select * from UserRoles Where Id='{user.UserRoleId}'").FirstOrDefault().RoleName;
+                    StaticInfo.UserId = user.Id;
                 }
                 MainWindow.MainWindowInstance.MainFrame.Navigate(new ShopMainScreen());
             }

@@ -20,28 +20,103 @@ namespace OnlineShop.View
     /// </summary>
     public partial class ShopMainScreen : Page
     {
-        ObservableCollection<Category> CategoryList;
-        ObservableCollection<Product> ProductList;
+        IShopPage ActualPage;
+        ProductExplorer productExplorer;
+       ProductExplorer ProductExplorer 
+        { 
+            get
+            {
+                if(productExplorer == null)
+                {
+                    productExplorer = new ProductExplorer();
+                }
+                return productExplorer;
+            }
+            set
+            {
+                productExplorer = value;
+            }
+        }
+        AdminPanel adminPanel; 
+        AdminPanel AdminPanel 
+        { 
+            get
+            {
+                if(adminPanel == null)
+                {
+                    adminPanel = new AdminPanel();
+                }
+                return adminPanel;
+            }
+            set
+            {
+                adminPanel = value;
+            }
+        }
+        ProfilePage profilePage;
+        ProfilePage ProfilePage
+        { 
+            get
+            {
+                if(profilePage == null)
+                {
+                    profilePage = new ProfilePage();
+                }
+                return profilePage;
+            }
+            set
+            {
+                profilePage = value;
+            }
+        }
         public ShopMainScreen()
         {
             InitializeComponent();
-            CategoryList = new ObservableCollection<Category>();
-            ProductList = new ObservableCollection<Product>();
-            DownloadProductsAndCategories();
-            this.DataContext = this;
+            ShopPageFrame.Navigate(ProductExplorer);
+            ActualPage = ProductExplorer;
         }
 
-        private void DownloadProductsAndCategories()
+        private void Refresh(object sender, RoutedEventArgs e)
         {
-            using (var context = new OnlineShopDBContext())
+            ActualPage.Refresh();
+        }
+
+        private void HomePageClick(object sender, RoutedEventArgs e)
+        {
+            if (ActualPage == ProductExplorer)
+                ActualPage.Refresh();
+            else
             {
-               
-               var products = context.Products;
-                foreach (var p in products)
-                    ProductList.Add(p);
-                var categories = context.Categories;
-                foreach (var c in categories)
-                    CategoryList.Add(c);
+                ShopPageFrame.Navigate(ProductExplorer);
+                ActualPage = ProductExplorer;
+            }
+        }
+
+        private void AdminPanelClick(object sender, RoutedEventArgs e)
+        {
+            if (StaticInfo.IsAdmin)
+            {
+                ShopPageFrame.Navigate(AdminPanel);
+                ActualPage = AdminPanel;
+            }
+            else
+                MessageBox.Show("You do not have permission to do this");
+
+        }
+
+        private void CartClick(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+        private void ProfileClick(object sender, RoutedEventArgs e)
+        {
+            if (ActualPage == ProfilePage)
+                ActualPage.Refresh();
+            else
+            {
+                ShopPageFrame.Navigate(ProfilePage);
+                ActualPage = ProfilePage;
             }
         }
     }
